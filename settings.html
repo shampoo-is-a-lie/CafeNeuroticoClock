@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Clock Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:           #2C1E16;
+    --bg_panel:     rgba(67,40,24,0.6);
+    --bg_menu:      #432818;
+    --accent:       #D4A373;
+    --text_main:    #FFE6A7;
+    --text_sec:     #E6CC98;
+    --text_dim:     #A47148;
+    --border:       rgba(212,163,115,0.2);
+    --border_solid: #8B5A2B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: transparent;
+    font-family: 'Raleway', sans-serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    user-select: none;
+  }
+
+  button { font-family: 'Raleway', sans-serif; -webkit-app-region: no-drag; }
+
+  #app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgba(18, 10, 5, 0.97);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border_solid);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  /* ── Header ─────────────────────────────────────────────────────────────── */
+  #header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px 10px;
+    background: var(--bg_menu);
+    border-bottom: 1px solid var(--border_solid);
+    flex-shrink: 0;
+    -webkit-app-region: drag;
+  }
+  #header-title {
+    font-size: 10px;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+  #btn-close {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--border_solid);
+    background: rgba(0,0,0,0.4);
+    color: var(--text_dim);
+    font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    -webkit-app-region: no-drag;
+  }
+  #btn-close:hover { background: #c62828; border-color: #c62828; color: #fff; }
+
+  /* ── Scroll body ─────────────────────────────────────────────────────────── */
+  #scroll-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    -webkit-app-region: no-drag;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border_solid) transparent;
+  }
+
+  /* ── Section label ───────────────────────────────────────────────────────── */
+  .s-section-label {
+    font-size: 9px;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  /* ── Button row ──────────────────────────────────────────────────────────── */
+  .s-row { display: flex; gap: 7px; flex-wrap: wrap; }
+
+  .s-btn {
+    background: var(--bg_menu);
+    border: 1px solid var(--border_solid);
+    color: var(--text_sec);
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    flex: 1;
+    min-width: 60px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .s-btn:hover  { background: var(--bg_panel); color: var(--text_main); border-color: var(--accent); }
+  .s-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); box-shadow: 0 0 10px rgba(212,163,115,0.4); }
+
+  .s-divider { height: 1px; background: var(--border_solid); opacity: 0.45; }
+
+  /* ── Wallpapers hint ─────────────────────────────────────────────────────── */
+  #wallpapers-hint {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text_dim);
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    padding: 8px 10px;
+    border: 1px dashed var(--border_solid);
+    border-radius: 5px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  /* ── Theme accordion ─────────────────────────────────────────────────────── */
+  #theme-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 260px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border_solid) transparent;
+  }
+
+  .theme-acc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: var(--bg_menu);
+    border: 1px solid var(--border_solid);
+    color: var(--text_sec);
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+  }
+  .theme-acc-header:hover { border-color: var(--accent); color: var(--text_main); }
+  .theme-acc-header.has-active { border-color: var(--accent); color: var(--accent); }
+  .theme-acc-chevron {
+    font-size: 9px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .theme-acc-header.open .theme-acc-chevron { transform: rotate(90deg); }
+
+  .theme-acc-body {
+    display: none;
+    flex-direction: column;
+    gap: 3px;
+    padding: 4px 0 4px 8px;
+  }
+  .theme-acc-body.open { display: flex; }
+
+  .theme-name-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text_sec);
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.12s;
+    text-align: left;
+  }
+  .theme-name-btn:hover  { background: var(--bg_menu); border-color: var(--border_solid); color: var(--text_main); }
+  .theme-name-btn.active { background: var(--bg_menu); border-color: var(--accent); color: var(--accent); }
+
+  .theme-swatch {
+    width: 16px; height: 16px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    border: 1.5px solid;
+  }
+
+  /* ── Done button ─────────────────────────────────────────────────────────── */
+  #btn-done {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border_solid);
+    background: transparent;
+    color: var(--text_dim);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 4px;
+  }
+  #btn-done:hover { border-color: var(--accent); color: var(--text_main); }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="header">
+    <span id="header-title">⚙ Settings</span>
+    <button id="btn-close" title="Close">✕</button>
+  </div>
+
+  <div id="scroll-body">
+
+    <div class="s-section-label">Visual Theme</div>
+    <div class="s-row">
+      <button class="s-btn" id="s-theme-minimalist">Minimalist</button>
+      <button class="s-btn" id="s-theme-crema">CREMA Splash</button>
+      <button class="s-btn" id="s-theme-kenburns">Ken Burns</button>
+    </div>
+
+    <div class="s-divider"></div>
+
+    <div class="s-section-label">Art Slideshow Background</div>
+    <div class="s-row" id="s-kb-row">
+      <button class="s-btn" id="s-kb-off">Off</button>
+      <button class="s-btn" id="s-kb-on">On</button>
+    </div>
+
+    <div class="s-section-label">Image Source</div>
+    <div class="s-row">
+      <button class="s-btn" id="s-src-all">All</button>
+      <button class="s-btn" id="s-src-heroes">Heroes</button>
+      <button class="s-btn" id="s-src-covers">Covers</button>
+      <button class="s-btn" id="s-src-screenshots">Screenshots</button>
+      <button class="s-btn" id="s-src-wallpapers">Wallpapers</button>
+    </div>
+    <div id="wallpapers-hint" style="display:none">
+      No wallpapers found — download <strong>wallpapers.zip</strong> from the GitHub repo
+      and extract to <strong>GameManagerConfig/wallpapers/</strong> next to the AppImage.
+    </div>
+
+    <div class="s-section-label">Show Game Name</div>
+    <div class="s-row">
+      <button class="s-btn" id="s-gamename-off">Off</button>
+      <button class="s-btn" id="s-gamename-on">On</button>
+    </div>
+
+    <div class="s-divider"></div>
+
+    <div class="s-section-label">Color Theme</div>
+    <div id="theme-picker"></div>
+
+    <button id="btn-done">Done</button>
+
+  </div>
+</div>
+<script src="themes.js"></script>
+<script src="settings-renderer.js"></script>
+</body>
+</html>
