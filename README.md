@@ -1,14 +1,10 @@
 <div align="center">
 
-```
-╔══════════════════════════════════════════════════╗
-║                                                  ║
-║        C A F E   N E U R O T I C O              ║
-║                                                  ║
-║   ◈  ─────────── C L O C K ───────────  ◈   ║
-║                                                  ║
-╚══════════════════════════════════════════════════╝
-```
+<img src="assets/icons/CNClock.svg" width="128" alt="Cafe Neurotico Clock"/>
+
+<br>
+
+# C A F E &nbsp; N E U R O T I C O &nbsp; C L O C K
 
 **A floating desktop clock for the obsessively caffeinated.**
 
