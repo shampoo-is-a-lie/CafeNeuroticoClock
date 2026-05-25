@@ -170,7 +170,9 @@ ipcMain.handle('scan-images', (_, source) => {
     walk(path.join(baseDir, 'GameManagerConfig', 'images'));
     // EmuLatte: structured subdirs
     walk(path.join(baseDir, 'GameManagerConfig', 'EmuLatte', 'images'));
-    // Wallpapers: deployed alongside the AppImage by postdist
+    // Bundled wallpapers (inside AppImage)
+    walk(path.join(__dirname, 'assets', 'wallpapers'));
+    // User-provided wallpapers alongside the AppImage (optional extras)
     walk(path.join(baseDir, 'GameManagerConfig', 'wallpapers'));
 
     if (source && source !== 'all')

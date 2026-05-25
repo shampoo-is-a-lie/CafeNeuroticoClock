@@ -118,11 +118,13 @@ When the Ken Burns effect is enabled, the clock reads images from:
 
 - `GameManagerConfig/images/` — CNGM game art (heroes, covers, screenshots)
 - `GameManagerConfig/EmuLatte/images/` — EmuLatte art, organized by platform
-- `GameManagerConfig/wallpapers/` — curated wallpapers (see below)
+- Bundled wallpapers — included in the AppImage, available immediately
 
 Images are classified by filename and directory. You can narrow the source to a single category — **Heroes**, **Covers**, **Screenshots**, or **Wallpapers** — or leave it on **All** for the full library.
 
 Enable **Show Game Name** in settings to display a fading label with the game title when each image appears.
+
+> You can also drop your own images into `GameManagerConfig/wallpapers/` next to the AppImage to extend the wallpaper collection.
 
 <br>
 
@@ -140,30 +142,7 @@ chmod +x CafeNeuroticoClock.AppImage
 ./CafeNeuroticoClock.AppImage
 ```
 
-Place it alongside your CNGM installation (e.g. `~/Games/CNGM/`) so it can find the game art automatically.
-
-<br>
-
-### Wallpapers
-
-Wallpapers are not bundled in the AppImage. To use them:
-
-1. Download **`wallpapers.zip`** from the [Releases](../../releases) page
-2. Extract the contents next to the AppImage:
-
-```
-~/Games/CNGM/
-├── CafeNeuroticoClock.AppImage
-└── GameManagerConfig/
-    └── wallpapers/
-        ├── 1.png
-        ├── 2.png
-        └── ...
-```
-
-Then open Settings → Image Source → **Wallpapers**.
-
-> If no wallpapers are found, the settings window will tell you so with installation instructions.
+Place it alongside your CNGM installation (e.g. `~/Games/CNGM/`) so it can find the game art automatically. Wallpapers are bundled — no extra downloads needed.
 
 <br>
 
@@ -177,7 +156,7 @@ npm start          # run in development
 npm run dist       # build AppImage and deploy to ~/Games/CNGM/
 ```
 
-The `postdist` script deploys the AppImage and wallpapers to `~/Games/CNGM/` automatically.
+The `postdist` script deploys the AppImage to `~/Games/CNGM/` automatically.
 
 <br>
 

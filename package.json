@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder --linux AppImage",
-    "postdist": "D=/home/jose/Games/CNGM; F=CafeNeuroticoClock.AppImage; [ -f $D/$F ] && mv $D/$F $D/CafeNeuroticoClock_old.AppImage; cp dist/$F $D/$F && mkdir -p $D/GameManagerConfig/wallpapers && cp assets/wallpapers/*.png $D/GameManagerConfig/wallpapers/ && echo \"Deployed $F and wallpapers to $D\""
+    "postdist": "D=/home/jose/Games/CNGM; F=CafeNeuroticoClock.AppImage; [ -f $D/$F ] && mv $D/$F $D/CafeNeuroticoClock_old.AppImage; cp dist/$F $D/$F && echo \"Deployed $F to $D\""
   },
   "author": "Shampoo is a Lie",
   "license": "GPL-3.0",
@@ -34,8 +34,7 @@
       "settings.html",
       "settings-preload.js",
       "settings-renderer.js",
-      "assets/**/*",
-      "!assets/wallpapers/**"
+      "assets/**/*"
     ]
   }
 }
