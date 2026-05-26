@@ -8,12 +8,12 @@ const settingsDir  = path.join(baseDir, 'GameManagerConfig', 'CafeNeuroticoClock
 const settingsFile = path.join(settingsDir, 'settings.json');
 
 const DEFAULTS = {
-    theme:        'minimalist',
-    kenBurns:     false,
+    theme:        'crema',
+    kenBurns:     true,
     imageSource:  'all',
     alwaysOnTop:  true,
     colorTheme:   'CREMA',
-    showGameName: false,
+    showGameName: true,
 };
 
 const THEME_SIZES = {
