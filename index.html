@@ -247,7 +247,10 @@
     padding: 5px 12px;
     pointer-events: none;
     max-width: 70%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
+  #kb-game-label.visible { opacity: 1; }
   #app.theme-minimalist #kb-game-label { display: none !important; }
   #kb-game-name {
     font-family: 'Raleway', sans-serif;
@@ -261,12 +264,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-  }
-  @keyframes gameLabelShow {
-    0%   { opacity: 0; }
-    12%  { opacity: 1; }
-    72%  { opacity: 1; }
-    100% { opacity: 0; }
   }
 </style>
 </head>

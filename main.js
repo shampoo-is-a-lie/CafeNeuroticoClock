@@ -125,6 +125,14 @@ ipcMain.on('settings-win-close', () => {
 ipcMain.on('win-minimize', () => win?.minimize());
 ipcMain.on('win-close',    () => win?.close());
 
+// Convert any absolute path to a safe file:// URL (mirrors CREMA's convertSafePath).
+// Electron can serve asar-bundled files only when addressed via file://.
+function toFileUrl(p) {
+    const normalized = p.replace(/\\/g, '/');
+    const abs = normalized.startsWith('/') ? normalized : '/' + normalized;
+    return 'file://' + encodeURI(abs).replace(/#/g, '%23').replace(/\?/g, '%3F');
+}
+
 ipcMain.handle('scan-images', (_, source) => {
     const EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp']);
     const imgs = [];
@@ -161,7 +169,7 @@ ipcMain.handle('scan-images', (_, source) => {
                     ? nameMatch[1].replace(/[_-]+/g, ' ').trim()
                     : stem.replace(/[_-]+/g, ' ').trim();
 
-                imgs.push({ path: full, type, name: type === 'wallpapers' ? '' : gameName });
+                imgs.push({ path: toFileUrl(full), type, name: type === 'wallpapers' ? '' : gameName });
             }
         }
     };

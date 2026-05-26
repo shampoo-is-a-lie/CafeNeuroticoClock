@@ -89,6 +89,8 @@ function applyTheme(theme) {
 }
 
 // ── Game name label ────────────────────────────────────────────────────────────
+// Mirrors CREMA's approach: the label stays visible the entire time the image
+// is on screen, updating instantly when the next image loads.
 function showGameLabel(name) {
     if (!settings.showGameName || !name || /^\d+$/.test(name.trim())) return;
     const el     = document.getElementById('kb-game-label');
@@ -96,9 +98,14 @@ function showGameLabel(name) {
     if (!el || !nameEl) return;
     nameEl.textContent = name;
     el.style.display   = 'block';
-    el.style.animation = 'none';
-    void el.offsetWidth; // force reflow to restart animation
-    el.style.animation = 'gameLabelShow 4.5s ease forwards';
+    requestAnimationFrame(() => el.classList.add('visible'));
+}
+
+function hideGameLabel() {
+    const el = document.getElementById('kb-game-label');
+    if (!el) return;
+    el.classList.remove('visible');
+    el.addEventListener('transitionend', () => { el.style.display = 'none'; }, { once: true });
 }
 
 // ── Ken Burns ──────────────────────────────────────────────────────────────────
@@ -154,6 +161,7 @@ function startKB() {
 function stopKB() {
     clearInterval(kbTimer);
     kbTimer = null;
+    hideGameLabel();
     ['kb-img-a', 'kb-img-b'].forEach(id => {
         const el = document.getElementById(id);
         el.onload = el.onerror = null;
@@ -227,8 +235,10 @@ function setupSettingListener() {
         if (key === 'showGameName') {
             settings.showGameName = val;
             if (!val) {
-                const el = document.getElementById('kb-game-label');
-                if (el) el.style.display = 'none';
+                hideGameLabel();
+            } else {
+                const visEl = document.querySelector('.kb-img.visible');
+                if (visEl?.dataset.name) showGameLabel(visEl.dataset.name);
             }
         }
     });
