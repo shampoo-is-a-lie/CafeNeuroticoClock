@@ -2,7 +2,6 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
     loadSettings:       ()        => ipcRenderer.invoke('load-settings'),
-    setAlwaysOnTop:     (v)       => ipcRenderer.invoke('set-always-on-top', v),
     scanImages:         (source)  => ipcRenderer.invoke('scan-images', source),
     minimize:           ()        => ipcRenderer.send('win-minimize'),
     close:              ()        => ipcRenderer.send('win-close'),

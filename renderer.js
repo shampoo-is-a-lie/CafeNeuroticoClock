@@ -1,10 +1,11 @@
 'use strict';
 
-let settings   = { theme: 'minimalist', kenBurns: false, imageSource: 'all', alwaysOnTop: true, colorTheme: 'CREMA', showGameName: false };
-let kbImages   = [];
-let kbIndex    = 0;
-let kbActive   = 'a';
-let kbTimer    = null;
+let settings          = { theme: 'minimalist', kenBurns: false, imageSource: 'all', alwaysOnTop: true, colorTheme: 'CREMA', showGameName: false };
+let kbImages          = [];
+let kbIndex           = 0;
+let kbActive          = 'a';
+let kbTimer           = null;
+let _labelHideHandler = null;
 
 const KB_INTERVAL = 12000;
 const BASE_W = { minimalist: 400, crema: 700, kenburns: 900 };
@@ -89,13 +90,16 @@ function applyTheme(theme) {
 }
 
 // ── Game name label ────────────────────────────────────────────────────────────
-// Mirrors CREMA's approach: the label stays visible the entire time the image
-// is on screen, updating instantly when the next image loads.
 function showGameLabel(name) {
     if (!settings.showGameName || !name || /^\d+$/.test(name.trim())) return;
     const el     = document.getElementById('kb-game-label');
     const nameEl = document.getElementById('kb-game-name');
     if (!el || !nameEl) return;
+    // Cancel any in-flight hide transition so it can't overwrite display:block below.
+    if (_labelHideHandler) {
+        el.removeEventListener('transitionend', _labelHideHandler);
+        _labelHideHandler = null;
+    }
     nameEl.textContent = name;
     el.style.display   = 'block';
     requestAnimationFrame(() => el.classList.add('visible'));
@@ -105,7 +109,8 @@ function hideGameLabel() {
     const el = document.getElementById('kb-game-label');
     if (!el) return;
     el.classList.remove('visible');
-    el.addEventListener('transitionend', () => { el.style.display = 'none'; }, { once: true });
+    _labelHideHandler = () => { el.style.display = 'none'; _labelHideHandler = null; };
+    el.addEventListener('transitionend', _labelHideHandler, { once: true });
 }
 
 // ── Ken Burns ──────────────────────────────────────────────────────────────────

@@ -69,8 +69,6 @@ app.on('window-all-closed', () => app.quit());
 
 ipcMain.handle('load-settings', () => readSettings());
 
-ipcMain.handle('save-settings', (_, s) => { writeSettings(s); });
-
 ipcMain.handle('set-theme-size', (_, theme) => {
     const sz = THEME_SIZES[theme] || THEME_SIZES.minimalist;
     if (win) win.setSize(sz.w, sz.h, true);
