@@ -188,15 +188,15 @@ Open with the **⚙** button (top-right of any clock window).
 ## ◈ &nbsp; The Cafe Neurotico Ecosystem
 
 ```
-  CREMA          Boot splash and system branding
-     │
-     └──▸  CNGM           Game Manager — browse, launch, manage your library
-               │
-               ├──▸  GRINDER        ROM importer — GOG, Epic, custom games
-               │
-               ├──▸  EmuLatte       Emulation frontend — ROMs, cores, saves
-               │
-               └──▸  CN Clock       This. Floating time. Ambient art. ◈
+  CNGM           Central hub — PC game library, store sync, launches all companion apps
+    │
+    ├──▸  CREMA       Fullscreen / gamepad counterpart for CNGM + EmuLatte
+    │
+    ├──▸  GRINDER     GOG & Epic install engine — feeds games back into CNGM
+    │
+    ├──▸  EmuLatte    ROM library manager — emulation counterpart to CNGM
+    │
+    └──▸  CN Clock ◈  Floating desktop clock — shows art from CNGM + EmuLatte
 ```
 
 CN Clock reads game art from wherever CNGM and EmuLatte store it — no extra setup if you're already in the ecosystem.
