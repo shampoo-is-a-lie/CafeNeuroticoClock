@@ -158,8 +158,9 @@
   #app.theme-crema #crema-circle {
     position: absolute;
     width: calc(400px * var(--clock-scale)); height: calc(400px * var(--clock-scale)); border-radius: 50%;
-    background: var(--border_solid);
-    box-shadow: 0 0 100px rgba(0,0,0,0.7), 0 0 40px rgba(212,163,115,0.15);
+    background: color-mix(in srgb, var(--bg) 55%, transparent);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 0 120px rgba(0,0,0,0.8), 0 0 50px rgba(0,0,0,0.5), 0 0 40px rgba(212,163,115,0.12);
   }
   #app.theme-crema #time-wrap {
     position: relative; z-index: 1;
