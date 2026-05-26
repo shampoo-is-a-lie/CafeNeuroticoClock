@@ -121,13 +121,11 @@ When the Ken Burns effect is enabled, the clock reads images from:
 
 - `GameManagerConfig/images/` — CNGM game art (heroes, covers, screenshots)
 - `GameManagerConfig/EmuLatte/images/` — EmuLatte art, organized by platform
-- Bundled wallpapers — included in the AppImage, available immediately
+- `GameManagerConfig/wallpapers/` — your own wallpapers, dropped here alongside the AppImage
 
 Images are classified by filename and directory. You can narrow the source to a single category — **Heroes**, **Covers**, **Screenshots**, or **Wallpapers** — or leave it on **All** for the full library.
 
-Enable **Show Game Name** in settings to display a fading label with the game title when each image appears.
-
-> You can also drop your own images into `GameManagerConfig/wallpapers/` next to the AppImage to extend the wallpaper collection.
+Enable **Show Game Name** in settings to display a label with the game title while each image is shown.
 
 <br>
 
@@ -145,7 +143,7 @@ chmod +x CafeNeuroticoClock.AppImage
 ./CafeNeuroticoClock.AppImage
 ```
 
-Place it alongside your CNGM installation (e.g. `~/Games/CNGM/`) so it can find the game art automatically. Wallpapers are bundled — no extra downloads needed.
+Place it alongside your CNGM installation (e.g. `~/Games/CNGM/`) so it can find the game art automatically.
 
 <br>
 

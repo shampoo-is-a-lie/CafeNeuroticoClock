@@ -191,13 +191,18 @@ function crossfadeKB() {
         requestAnimationFrame(() => {
             el.classList.add('visible');
             showGameLabel(el.dataset.name);
+            // Begin fading out the old image after the new one is fully visible,
+            // then hard-reset it once the CSS fade-out (1.5s) is done.
+            // setTimeout is used instead of transitionend — more reliable; transitionend
+            // can silently fail if the transition is interrupted, leaving a stale listener
+            // that resets the element the next time its opacity transition fires.
             setTimeout(() => {
                 outEl.classList.remove('visible');
-                outEl.addEventListener('transitionend', () => {
+                setTimeout(() => {
                     outEl.style.transition = 'none';
                     outEl.style.opacity    = '0';
                     outEl.className        = 'kb-img';
-                }, { once: true });
+                }, 1550);
             }, 1500);
         });
     });
