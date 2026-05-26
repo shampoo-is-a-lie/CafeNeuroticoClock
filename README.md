@@ -68,12 +68,13 @@ Three distinct presentations — each resizable, each adapting to your chosen co
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  MINIMALIST   Small floating widget. Dashed border.     │
-│               Semi-transparent. Stays out of your way.  │
+│               Semi-transparent bg tinted by color       │
+│               theme. Stays out of your way.             │
 │               400 × 160  (default)                      │
 ├─────────────────────────────────────────────────────────┤
-│  CREMA        Full-window dark splash. Central circle.  │
-│  SPLASH       The CREMA boot aesthetic, as a clock.     │
-│               700 × 700  (default)                      │
+│  CREMA        Full-window dark splash. A large frosted  │
+│  SPLASH  ★   glass circle frames the clock, blurring   │
+│               the art behind it. 700 × 700  (default)   │
 ├─────────────────────────────────────────────────────────┤
 │  KEN BURNS    Game art fills the window. Smooth         │
 │               pan-and-zoom crossfades. Clock centered   │
@@ -81,6 +82,8 @@ Three distinct presentations — each resizable, each adapting to your chosen co
 │               900 × 560  (default)                      │
 └─────────────────────────────────────────────────────────┘
 ```
+
+★ Default theme on first launch.
 
 All windows are **freely resizable** — the clock text scales proportionally with the window.
 
@@ -168,13 +171,13 @@ The `postdist` script deploys the AppImage to `~/Games/CNGM/` automatically.
 
 Open with the **⚙** button (top-right of any clock window).
 
-| Setting | Options | Description |
-|:---|:---|:---|
-| **Visual Theme** | Minimalist · CREMA Splash · Ken Burns | Changes window layout and size |
-| **Art Slideshow** | Off · On | Enables the KB background on Minimalist and CREMA themes |
-| **Image Source** | All · Heroes · Covers · Screenshots · Wallpapers | Filters which images appear |
-| **Show Game Name** | Off · On | Displays a fading title label when each image loads |
-| **Color Theme** | 54 palettes | Live preview — the settings window recolors itself too |
+| Setting | Options | Default | Description |
+|:---|:---|:---|:---|
+| **Visual Theme** | Minimalist · CREMA Splash · Ken Burns | CREMA Splash | Changes window layout and size |
+| **Art Slideshow** | Off · On | On | Enables the KB background on Minimalist and CREMA themes |
+| **Image Source** | All · Heroes · Covers · Screenshots · Wallpapers | All | Filters which images appear in the slideshow |
+| **Show Game Name** | Off · On | On | Displays the game title while each image is on screen |
+| **Color Theme** | 54 palettes | CREMA | Live preview — the settings window recolors itself too |
 
 <br>
 
